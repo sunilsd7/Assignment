@@ -125,7 +125,7 @@ const Services = () => {
              }} onMouseLeave={()=>{
               setOpenCorrection(false)
               setCurrentIndex(index)
-
+g
             }}>Complaint,cause,corection</p>
               { openCorrection && index===currentIndex &&
             <div className="absolute right-0 top-10  z-50 w-64 px-5" >
