@@ -7,6 +7,8 @@ const Services = () => {
   const [activeIndex, setActiveIndex] = useState(null);
   const [activeSubIndex, setActiveSubIndex] = useState(null);
   const [openSubIndex, setOpenSubIndex] = useState(null);
+  const [openCorrection,setOpenCorrection]=useState(false);
+  const[currentIndex,setCurrentIndex]=useState(null);
 
   const toggleDropdown = (index) => {
     setOpenIndex(openIndex === index ? null : index);
@@ -29,6 +31,7 @@ const Services = () => {
     {
       id: 0,
       name: "Brake System Issue",
+      
       subItems: [
         {
           name: "Brake Pad Replacement",
@@ -98,10 +101,13 @@ const Services = () => {
       <p className="font-light mt-2">$1450</p></div>
       <ul className="text-lg space-y-3">
         {ServiceItem.map((item, index) => (
-          <div key={item.id} className="py-2">
+          <div key={item.id} className="py-2 ">
+            <div className={`flex relative justify-between items-center cursor-pointer ${activeIndex === index ? "bg-gray-200  " : "hover:bg-gray-300 "}  `}>
+             
+
             <button
               className={`w-full flex items-center gap-2 py-3 px-4 rounded-lg text-left text-2xl
-                ${activeIndex === index ? "bg-gray-400 text-white" : "hover:bg-gray-300 hover:text-white"}`}
+                `}
               onClick={() => {
                 handleActive(index);
                 toggleDropdown(index);
@@ -111,7 +117,27 @@ const Services = () => {
                 openIndex === index ? <IoMdRemove className="text-xl" /> : <IoMdAdd className="text-xl" />
               ) : null}
               {item.name}
+              
             </button>
+            
+            <p className="underline underline-offset-6 font-light decoration-dashed" onMouseEnter={( )=>{setOpenCorrection(true)
+              setCurrentIndex(index)
+             }} onMouseLeave={()=>{
+              setOpenCorrection(false)
+              setCurrentIndex(index)
+
+            }}>Complaint,cause,corection</p>
+              { openCorrection && index===currentIndex &&
+            <div className="absolute right-0 top-10  z-50 w-64 px-5" >
+              <div className="bg-gray-200 mt-2"><p className="bg-light underline underline-offset-2 decoration-dashed">Complaint</p>
+              <p>The car engine oveheats after driving for a short distance.</p></div>
+              <div className="bg-gray-200 mt-2"> <p className="bg-light underline underline-offset-2 decoration-dashed">Cause</p>
+              <p>Low cooling levels or malfunctioning raditior.</p></div>
+              <div className="bg-gray-200 mt-2"><p className="bg-light underline underline-offset-2 decoration-dashed">
+                Catuation</p> <p>Refill coolant and inspect the radiator for leaks or malfunctions.</p></div>
+            </div>} 
+            </div>
+          
             {openIndex === index && item.subItems.length > 0 && (
               <div className="ml-6">
                 {item.subItems.map((subItem, subIndex) => (
@@ -124,8 +150,12 @@ const Services = () => {
                         toggleSubDropdown(subIndex);
                       }}
                     >
+                      
+
                       {openSubIndex === subIndex ? <IoMdRemove className="text-lg" /> : <IoMdAdd className="text-lg" />}
-                      {subItem.name}
+                      {subItem.name }
+
+                      
                     </button>
                     {openSubIndex === subIndex && (
                       <div className="ml-6 mt-2">

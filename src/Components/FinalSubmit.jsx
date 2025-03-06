@@ -2,7 +2,7 @@ import React from "react";
 import CustomModal from "../CommonUi/Modal";
 import { FaCheck } from "react-icons/fa";
 
-const ConfirmationModal = ({ isOpen, closeModal }) => {
+const FinalSubmit = ({ isOpen, closeModal }) => {
   return (
     <CustomModal isOpen={isOpen} closeModal={closeModal}>
       <div className="p-6 bg-white rounded-lg shadow-md">
@@ -10,7 +10,7 @@ const ConfirmationModal = ({ isOpen, closeModal }) => {
         <h2 className="font-bold text-2xl mb-4 ">You are all set.</h2>
         <p>Feel free to send us a message with any extra details or files.</p></div>
             <div className="flex justify-center">
-            <FaCheck size={300} color="green" className="icon"/>
+            <FaCheck size={300} color="black" className="icon"/>
             </div>
 
         <div>
@@ -41,4 +41,4 @@ const ConfirmationModal = ({ isOpen, closeModal }) => {
   );
 };
 
-export default ConfirmationModal;
+export default FinalSubmit;
